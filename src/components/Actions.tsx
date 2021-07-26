@@ -93,7 +93,7 @@ export const SelectedShapeActions = ({
 
       {renderAction("changeOpacity")}
 
-      <fieldset>
+      {/* <fieldset>
         <legend>{t("labels.layers")}</legend>
         <div className="buttonList">
           {renderAction("sendToBack")}
@@ -101,7 +101,7 @@ export const SelectedShapeActions = ({
           {renderAction("bringToFront")}
           {renderAction("bringForward")}
         </div>
-      </fieldset>
+      </fieldset> */}
 
       {targetElements.length > 1 && (
         <fieldset>
@@ -176,7 +176,6 @@ export const ShapesSwitcher = ({
           checked={elementType === value}
           name="editor-current-shape"
           title={`${capitalizeString(label)} — ${shortcut}`}
-          keyBindingLabel={`${index + 1}`}
           aria-label={capitalizeString(label)}
           aria-keyshortcuts={shortcut}
           data-testid={value}
@@ -192,6 +191,7 @@ export const ShapesSwitcher = ({
         />
       );
     })}
+  {}
   </>
 );
 
@@ -205,11 +205,8 @@ export const ZoomActions = ({
   <Stack.Col gap={1}>
     <Stack.Row gap={1} align="center">
       {renderAction("zoomIn")}
-      {renderAction("zoomOut")}
-      {renderAction("resetZoom")}
-      <div style={{ marginInlineStart: 4 }}>
-        {(zoom.value * 100).toFixed(0)}%
-      </div>
+      {(zoom.value * 100).toFixed(0)}%{renderAction("zoomOut")}
+      <div style={{ marginInlineStart: 4 }}></div>
     </Stack.Row>
   </Stack.Col>
 );

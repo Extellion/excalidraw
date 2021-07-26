@@ -510,10 +510,6 @@
     }
   }
 
-  .disable-pointerEvents {
-    pointer-events: none !important;
-  }
-
   &.excalidraw--view-mode {
     .App-menu {
       display: flex;

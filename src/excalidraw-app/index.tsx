@@ -454,6 +454,7 @@ const ExcalidrawWrapper = () => {
         handleKeyboardGlobally={true}
         onLibraryChange={onLibraryChange}
         autoFocus={true}
+        zenModeEnabled={true}
       />
       {excalidrawAPI && <CollabWrapper excalidrawAPI={excalidrawAPI} />}
       {errorMessage && (

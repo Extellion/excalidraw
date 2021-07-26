@@ -7,8 +7,7 @@ export const showSelectedShapeActions = (
   elements: readonly NonDeletedExcalidrawElement[],
 ) =>
   Boolean(
-    !appState.viewModeEnabled &&
-      (appState.editingElement ||
-        getSelectedElements(elements, appState).length ||
-        appState.elementType !== "selection"),
+    appState.editingElement ||
+      getSelectedElements(elements, appState).length ||
+      appState.elementType !== "selection",
   );

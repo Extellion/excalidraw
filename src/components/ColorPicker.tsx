@@ -127,8 +127,8 @@ const Picker = ({
       aria-label={t("labels.colorPicker")}
       onKeyDown={handleKeyDown}
     >
-      <div className="color-picker-triangle color-picker-triangle-shadow"></div>
-      <div className="color-picker-triangle"></div>
+      {/* <div className="color-picker-triangle color-picker-triangle-shadow"></div>
+      <div className="color-picker-triangle"></div> */}
       <div
         className="color-picker-content"
         ref={(el) => {
@@ -223,18 +223,19 @@ const ColorInput = React.forwardRef(
     );
 
     return (
-      <label className="color-input-container">
-        <div className="color-picker-hash">#</div>
-        <input
-          spellCheck={false}
-          className="color-picker-input"
-          aria-label={label}
-          onChange={(event) => changeColor(event.target.value)}
-          value={(innerValue || "").replace(/^#/, "")}
-          onBlur={() => setInnerValue(color)}
-          ref={inputRef}
-        />
-      </label>
+      // <label className="color-input-container">
+      //   <div className="color-picker-hash">#</div>
+      //   <input
+      //     spellCheck={false}
+      //     className="color-picker-input"
+      //     aria-label={label}
+      //     onChange={(event) => changeColor(event.target.value)}
+      //     value={(innerValue || "").replace(/^#/, "")}
+      //     onBlur={() => setInnerValue(color)}
+      //     ref={inputRef}
+      //   />
+      // </label>
+      <></>
     );
   },
 );

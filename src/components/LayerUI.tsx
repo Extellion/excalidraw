@@ -506,12 +506,7 @@ const LayerUI = ({
   );
 
   const renderSelectedShapeActions = () => (
-    <Section
-      heading="selectedShapeActions"
-      className={clsx("zen-mode-transition", {
-        "transition-left": zenModeEnabled,
-      })}
-    >
+    <Section heading="selectedShapeActions" className="shapers">
       <Island
         className={CLASSES.SHAPE_ACTIONS_MENU}
         padding={2}
@@ -574,42 +569,27 @@ const LayerUI = ({
             gap={4}
             className={clsx({ "disable-pointerEvents": zenModeEnabled })}
           >
-            {viewModeEnabled
-              ? renderViewModeCanvasActions()
-              : renderCanvasActions()}
             {shouldRenderSelectedShapeActions && renderSelectedShapeActions()}
           </Stack.Col>
           {!viewModeEnabled && (
-            <Section heading="shapes">
+            <Section heading="shapes" className="toolser">
               {(heading) => (
                 <Stack.Col gap={4} align="start">
                   <Stack.Row gap={1}>
-                    <LockButton
-                      zenModeEnabled={zenModeEnabled}
-                      checked={appState.elementLocked}
-                      onChange={onLockToggle}
-                      title={t("toolBar.lock")}
-                    />
                     <Island
                       padding={1}
                       className={clsx({ "zen-mode": zenModeEnabled })}
                     >
-                      <HintViewer appState={appState} elements={elements} />
-                      {heading}
                       <Stack.Row gap={1}>
                         <ShapesSwitcher
                           canvas={canvas}
                           elementType={appState.elementType}
                           setAppState={setAppState}
                         />
+                        {renderImageExportDialog()}
                       </Stack.Row>
                     </Island>
-                    <LibraryButton
-                      appState={appState}
-                      setAppState={setAppState}
-                    />
                   </Stack.Row>
-                  {libraryMenu}
                 </Stack.Col>
               )}
             </Section>
@@ -655,12 +635,12 @@ const LayerUI = ({
           className={clsx(
             "layer-ui__wrapper__footer-left zen-mode-transition",
             {
-              "layer-ui__wrapper__footer-left--transition-left": zenModeEnabled,
+              "layer-ui__wrapper__footer-left--transition-left": false,
             },
           )}
         >
           <Stack.Col gap={2}>
-            <Section heading="canvasActions">
+            <Section heading="canvasActions" className="zoomer">
               <Island padding={1}>
                 <ZoomActions
                   renderAction={actionManager.renderAction}

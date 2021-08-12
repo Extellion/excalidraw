@@ -5,17 +5,14 @@ import { ExcalidrawElement } from "../element/types";
 import { t } from "../i18n";
 import { useIsMobile } from "../components/App";
 import {
-  canChangeSharpness,
-  canHaveArrowheads,
   getTargetElements,
   hasBackground,
-  hasStrokeStyle,
   hasStrokeWidth,
   hasText,
 } from "../scene";
 import { SHAPES } from "../shapes";
 import { AppState, Zoom } from "../types";
-import { capitalizeString, isTransparent, setCursorForShape } from "../utils";
+import { capitalizeString, setCursorForShape } from "../utils";
 import Stack from "./Stack";
 import { ToolButton } from "./ToolButton";
 
@@ -38,70 +35,93 @@ export const SelectedShapeActions = ({
   const isMobile = useIsMobile();
   const isRTL = document.documentElement.getAttribute("dir") === "rtl";
 
-  const showFillIcons =
-    hasBackground(elementType) ||
-    targetElements.some(
-      (element) =>
-        hasBackground(element.type) && !isTransparent(element.backgroundColor),
-    );
+  // const showFillIcons =
+  //   hasBackground(elementType) ||
+  //   targetElements.every(
+  //     (element) =>
+  //       hasBackground(element.type) && !isTransparent(element.backgroundColor),
+  //   );
+
   const showChangeBackgroundIcons =
-    hasBackground(elementType) ||
-    targetElements.some((element) => hasBackground(element.type));
+    (["rectangle", "ellipse", "diamond"].includes(elementType) ||
+      (!!targetElements.length &&
+        targetElements.every((element) =>
+          ["rectangle", "ellipse", "diamond"].includes(element.type),
+        ))) &&
+    (hasBackground(elementType) ||
+      (!!targetElements.length &&
+        targetElements.every((element) => hasBackground(element.type))));
+
+  const showStrokeColorPicker =
+    ["line", "arrow", "freedraw", "text"].includes(elementType) ||
+    (!!targetElements.length &&
+      targetElements.every((element) =>
+        ["line", "arrow", "freedraw"].includes(element.type),
+      ));
+
+  const showStrokeWidthIcons =
+    ["line", "arrow", "freedraw"].includes(elementType) ||
+    (!!targetElements.length &&
+      targetElements.every((element) =>
+        ["line", "arrow", "freedraw"].includes(element.type),
+      ));
 
   return (
     <div className="panelColumn">
-      {renderAction("changeStrokeColor")}
+      {showStrokeColorPicker && renderAction("changeStrokeColor")}
       {showChangeBackgroundIcons && renderAction("changeBackgroundColor")}
-      {showFillIcons && renderAction("changeFillStyle")}
+      {/*{showFillIcons && renderAction("changeFillStyle")}*/}
 
-      {(hasStrokeWidth(elementType) ||
-        targetElements.some((element) => hasStrokeWidth(element.type))) &&
+      {showStrokeWidthIcons &&
+        (hasStrokeWidth(elementType) ||
+          targetElements.every((element) => hasStrokeWidth(element.type))) &&
         renderAction("changeStrokeWidth")}
 
-      {(elementType === "freedraw" ||
-        targetElements.some((element) => element.type === "freedraw")) &&
-        renderAction("changeStrokeShape")}
+      {/*{(elementType === "freedraw" ||*/}
+      {/*  targetElements.some((element) => element.type === "freedraw")) &&*/}
+      {/*  renderAction("changeStrokeShape")}*/}
 
-      {(hasStrokeStyle(elementType) ||
-        targetElements.some((element) => hasStrokeStyle(element.type))) && (
-        <>
-          {renderAction("changeStrokeStyle")}
-          {renderAction("changeSloppiness")}
-        </>
-      )}
+      {/*{(hasStrokeStyle(elementType) ||*/}
+      {/*  targetElements.some((element) => hasStrokeStyle(element.type))) && (*/}
+      {/*  <>*/}
+      {/*    {renderAction("changeStrokeStyle")}*/}
+      {/*    {renderAction("changeSloppiness")}*/}
+      {/*  </>*/}
+      {/*)}*/}
 
-      {(canChangeSharpness(elementType) ||
-        targetElements.some((element) => canChangeSharpness(element.type))) && (
-        <>{renderAction("changeSharpness")}</>
-      )}
+      {/*{(canChangeSharpness(elementType) ||*/}
+      {/*  targetElements.some((element) => canChangeSharpness(element.type))) && (*/}
+      {/*  <>{renderAction("changeSharpness")}</>*/}
+      {/*)}*/}
 
       {(hasText(elementType) ||
-        targetElements.some((element) => hasText(element.type))) && (
+        (!!targetElements.length &&
+          targetElements.every((element) => hasText(element.type)))) && (
         <>
-          {renderAction("changeFontSize")}
+          {/*{renderAction("changeFontSize")}*/}
 
-          {renderAction("changeFontFamily")}
+          {/*{renderAction("changeFontFamily")}*/}
 
           {renderAction("changeTextAlign")}
         </>
       )}
 
-      {(canHaveArrowheads(elementType) ||
-        targetElements.some((element) => canHaveArrowheads(element.type))) && (
-        <>{renderAction("changeArrowhead")}</>
-      )}
+      {/*{(canHaveArrowheads(elementType) ||*/}
+      {/*  targetElements.some((element) => canHaveArrowheads(element.type))) && (*/}
+      {/*  <>{renderAction("changeArrowhead")}</>*/}
+      {/*)}*/}
 
-      {renderAction("changeOpacity")}
+      {/*{renderAction("changeOpacity")}*/}
 
-      {/* <fieldset>
+      <fieldset>
         <legend>{t("labels.layers")}</legend>
         <div className="buttonList">
           {renderAction("sendToBack")}
-          {renderAction("sendBackward")}
+          {/*{renderAction("sendBackward")}*/}
           {renderAction("bringToFront")}
-          {renderAction("bringForward")}
+          {/*{renderAction("bringForward")}*/}
         </div>
-      </fieldset> */}
+      </fieldset>
 
       {targetElements.length > 1 && (
         <fieldset>

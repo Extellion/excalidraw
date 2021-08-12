@@ -16,12 +16,12 @@ interface Hint {
 const getHints = ({ appState, elements }: Hint) => {
   const { elementType, isResizing, isRotating, lastPointerDownWith } = appState;
   const multiMode = appState.multiElement !== null;
-  // if (elementType === "arrow" || elementType === "line") {
-  //   if (!multiMode) {
-  //     return t("hints.linearElement");
-  //   }
-  //   return t("hints.linearElementMulti");
-  // }
+  if (elementType === "arrow" || elementType === "line") {
+    if (!multiMode) {
+      return t("hints.linearElement");
+    }
+    return t("hints.linearElementMulti");
+  }
 
   if (elementType === "freedraw") {
     return t("hints.freeDraw");

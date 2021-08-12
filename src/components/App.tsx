@@ -2326,18 +2326,16 @@ class App extends React.Component<AppProps, AppState> {
     if (this.state.elementType === "text") {
       this.handleTextOnPointerDown(event, pointerDownState);
       return;
-    } 
-    // else if (
-    //   this.state.elementType === "arrow" ||
-    //   this.state.elementType === "line"
-    // ) {
-    //   this.handleLinearElementOnPointerDown(
-    //     event,
-    //     this.state.elementType,
-    //     pointerDownState,
-    //   );
-    // } 
-    else if (this.state.elementType === "freedraw") {
+    } else if (
+      this.state.elementType === "arrow" ||
+      this.state.elementType === "line"
+    ) {
+      this.handleLinearElementOnPointerDown(
+        event,
+        this.state.elementType,
+        pointerDownState,
+      );
+    } else if (this.state.elementType === "freedraw") {
       this.handleFreeDrawElementOnPointerDown(
         event,
         this.state.elementType,
@@ -3119,10 +3117,9 @@ class App extends React.Component<AppProps, AppState> {
       // user clicks mouse in a way that it moves a tiny bit (thus
       // triggering pointermove)
       if (
-        !pointerDownState.drag.hasOccurred
-        // &&
-        // (this.state.elementType === "arrow" ||
-        //   this.state.elementType === "line")
+        !pointerDownState.drag.hasOccurred &&
+        (this.state.elementType === "arrow" ||
+          this.state.elementType === "line")
       ) {
         if (
           distance2d(

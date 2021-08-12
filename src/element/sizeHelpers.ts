@@ -24,8 +24,8 @@ export const getPerfectElementSize = (
   const absHeight = Math.abs(height);
 
   if (
-    // elementType === "line" ||
-    // elementType === "arrow" ||
+    elementType === "line" ||
+    elementType === "arrow" ||
     elementType === "freedraw"
   ) {
     const lockedAngle =
